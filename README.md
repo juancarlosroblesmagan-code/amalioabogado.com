@@ -10,6 +10,7 @@ Este repositorio recoge la documentación solicitada. No incluye el código fuen
 - [Enlaces sin #](docs/RUTAS.md): rutas como `/contacto`, navegación de secciones, historial y configuración del servidor.
 - [Dominio y publicación](docs/DOMINIO.md): canonical, robots, sitemap y comprobaciones pendientes.
 - [Textos legales y verificaciones pendientes](docs/LEGAL.md): alcance y proveedores que deben confirmarse; no certifica cumplimiento legal.
+- [Seguridad y mantenimiento](docs/SEGURIDAD.md): refuerzo aplicado al código y Plesk, pruebas y acciones del titular/proveedor.
 
 ## Estado
 
