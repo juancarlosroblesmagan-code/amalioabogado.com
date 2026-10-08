@@ -50,11 +50,11 @@ La ruta automática es `../private/amalio-contact.php` respecto de la raíz púb
 - Subida la compilación actual con `api/`, PHPMailer, rutas de secciones e indexación habilitada. Verificados 34 archivos estáticos remotos contra la entrega local, sin diferencias.
 - Creado `private/amalio-contact.php` fuera de `httpdocs`, con configuración SMTP y clave antispam generada. Permisos del directorio 700 y del archivo 600.
 - Confirmado PHP 8.3.35 (FPM servido por Apache), OpenSSL habilitado y `open_basedir` compatible con el directorio privado.
-- La ruta privada consultada desde la web devuelve 404. El endpoint del formulario devuelve JSON 503 mientras `enabled` siga en false y no haya contraseña configurada; no se ha enviado ningún correo de producción.
-- Pendiente: el titular debe introducir la contraseña directamente en Plesk; después activar la configuración y comprobar SMTP y recepción. No se ha cambiado la contraseña del buzón ni el destinatario.
+- La ruta privada consultada desde la web devuelve 404. El titular introdujo la contraseña directamente en Plesk, sin compartirla en chat o GitHub. Después se activó `enabled => true`, conservando la contraseña del buzón y el destinatario.
+- Prueba real autorizada: token HTTP 200 y un único envío de prueba aceptado por SMTP, con respuesta HTTP 200 y `ok: true`. Destinatario: `amalioabogado@icalba.com`; asunto: «Consulta jurídica · Otra consulta». El mensaje está identificado como prueba técnica, no consulta jurídica. Pendiente de que el titular confirme recepción en bandeja de entrada o spam; no se ha accedido al buzón destinatario.
 - Nginx todavía añade barra en la carga directa de `/contacto`; JavaScript normaliza la URL. Algunas respuestas estáticas de Nginx no incorporan las cabeceras de `.htaccess`; queda revisar su equivalente en Plesk.
 
-La extracción mostró un aviso por separadores de Windows en el ZIP; los archivos estáticos se comprobaron después byte a byte. La prueba de envío y de carga de todas las dependencias PHP queda pendiente de introducir las credenciales.
+La extracción mostró un aviso por separadores de Windows en el ZIP; los archivos estáticos se comprobaron después byte a byte. La prueba SMTP posterior pasó y cargó las dependencias PHP necesarias. No se han incluido contraseñas ni claves privadas en esta documentación.
 
 - Confirmar que `/api/contact.php?action=token` responde JSON, nunca código PHP, y sin caché. Sin configuración debe responder 503.
 - Probar un envío autorizado y verificar la recepción real en el buzón y la respuesta al visitante. Una aceptación SMTP no garantiza la llegada a bandeja de entrada.
