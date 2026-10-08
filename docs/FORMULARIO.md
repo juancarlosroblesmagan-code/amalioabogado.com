@@ -8,6 +8,22 @@ PHPMailer queda incluido al compilar; para una instalación nueva del proyecto e
 
 ## Configuración privada
 
+### Datos SMTP facilitados por el usuario
+
+| Parámetro | Valor |
+| --- | --- |
+| Servidor saliente | `amalioabogado.com` |
+| Puerto SMTP | `465` |
+| Seguridad | TLS implícito (`smtp_security => 'ssl'` en PHPMailer) |
+| Autenticación | Obligatoria |
+| Usuario previsto | `amalioabogado@amalioabogado.com` (confirmar que el proveedor usa la dirección completa) |
+| Remitente | `amalioabogado@amalioabogado.com` |
+| Destinatario actual | `amalioabogado@icalba.com` |
+
+La contraseña no se ha recibido ni se debe versionar. La configuración de ejemplo ya incluye estos datos sin secretos y mantiene `enabled => false`. Falta configurar la contraseña y la clave antispam en el archivo privado, confirmar PHP/OpenSSL, conectividad saliente y certificado TLS válido para `amalioabogado.com`, y probar recepción real. No deshabilitar la validación TLS si aparece un error: pedir al proveedor el hostname correcto del certificado.
+
+Los puertos entrantes POP3 995 e IMAP 993 no intervienen en el envío del formulario. El nuevo buzón se utiliza como remitente técnico; no se ha cambiado el email profesional visible ni el destinatario sin una petición expresa.
+
 ### Datos que debe facilitar el proveedor
 
 - Confirmación de PHP 8.2+ y OpenSSL en Plesk.
@@ -19,7 +35,7 @@ No enviar credenciales por chat ni subirlas a GitHub. Configurarlas directamente
 
 1. Fuera de la raíz pública, crear `private/` como directorio hermano de `httpdocs`.
 2. Copiar `backend/contact-config.example.php` como `private/amalio-contact.php`.
-3. Pedir al proveedor el host SMTP, puerto, seguridad TLS, usuario, contraseña y remitente autorizado. No compartir contraseñas en el chat. Mantener destinatario `amalioabogado@icalba.com`.
+3. Utilizar los datos SMTP facilitados arriba y configurar la contraseña del buzón directamente en el servidor. Confirmar con el proveedor cualquier discrepancia de usuario o certificado. No compartir contraseñas en el chat. Mantener destinatario `amalioabogado@icalba.com`.
 4. Rellenar la configuración y generar una clave con `php -r "echo bin2hex(random_bytes(32));"`. Restringir los permisos a la cuenta PHP; el directorio de contadores debe ser escribible por PHP y no accesible desde la web.
 5. Comprobar SPF, DKIM y DMARC del remitente. El visitante se usa como Reply-To, nunca como From.
 6. Cambiar `enabled` a `true` solo después de configurar todo. Si la estructura de carpetas es distinta, configurar la variable privada `AMALIO_CONTACT_CONFIG` con la ruta absoluta del archivo. Revisar restricciones `open_basedir` de Plesk.
