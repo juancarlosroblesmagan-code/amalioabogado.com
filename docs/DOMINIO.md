@@ -7,13 +7,13 @@ El usuario ha confirmado el 8 de octubre de 2026 la solicitud del dominio **amal
 - Indexación autorizada expresamente por el usuario: `PUBLICATION_APPROVED=true`. La compilación incluye robots permisivo y sitemap de la HOME; las verificaciones legales siguen pendientes.
 - El correo profesional sigue siendo `amalioabogado@icalba.com`; el dominio nuevo no implica un cambio de buzón.
 
-## Pendiente en Zafiro Telcom
+## Estado verificado y seguimiento
 
-1. Confirmar que el registro del dominio está completado y configurar los registros DNS indicados por el hosting.
-2. Instalar y verificar el certificado HTTPS.
-3. Redirigir HTTP a HTTPS y, si se configura `www`, redirigirlo al dominio principal sin `www`.
-4. Publicar únicamente `dist/` y verificar cabeceras, cookies, caché y contacto en el servidor real.
+1. Dominio operativo y HOME publicada. No se han modificado DNS desde este proyecto.
+2. HTTPS verificado; confirmar con el proveedor renovación automática y alertas.
+3. Comprobado el 8 de octubre de 2026: HTTP y `https://www.amalioabogado.com/` redirigen a `https://amalioabogado.com/`. Verificar periódicamente, especialmente tras cambios del proxy.
+4. Publicado el contenido de `dist/` en `httpdocs`; configuración SMTP fuera de la raíz pública. Seguridad reforzada y pruebas documentadas en `SEGURIDAD.md`.
 5. Completar las comprobaciones de privacidad recogidas en `docs/LEGAL.md`.
-6. Subir la compilación actual y comprobar robots, canonical, sitemap y Schema públicos; entonces solicitar indexación en Search Console. La versión remota revisada todavía tenía noindex y robots bloqueado.
+6. Robots permisivo, canonical, sitemap y Schema públicos comprobados. La configuración de indexación está habilitada; falta verificar cuentas y enviar el sitemap en Search Console/Bing. Esto no acredita indexación real ni presencia en respuestas de IA; ver `SEO-IA.md`.
 
-El dominio ya responde por HTTPS con la HOME. HTTP redirige a HTTPS; www todavía no redirige al dominio principal. No se ha accedido al panel ni se han cambiado DNS. Se entrega `.htaccess` para Apache; si Nginx sirve directamente los archivos, configurar sus equivalentes en Plesk y comprobar las cabeceras reales.
+Se ha accedido a Plesk con la sesión del titular para desplegar y reforzar la web; no se han cambiado DNS ni contraseñas del buzón. El proxy Nginx permanece y Apache aplica las cabeceras del proyecto a los recursos públicos. Los cambios futuros del servidor requieren volver a verificar esas cabeceras.

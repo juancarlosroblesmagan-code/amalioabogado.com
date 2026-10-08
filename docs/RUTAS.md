@@ -4,7 +4,9 @@ Los enlaces visibles usan rutas como `https://amalioabogado.com/contacto`, sin `
 
 ## Alias disponibles
 
-`/areas`, `/sobre-mi`, `/segunda-oportunidad`, `/bancario`, `/preguntas`, `/contacto`, `/forma-de-trabajar`, `/penal`, `/faq-segunda` y `/contenido` (salto accesible al contenido). El logotipo y «Volver arriba» usan `/`.
+`/areas-juridicas`, `/sobre-mi`, `/segunda-oportunidad`, `/reclamaciones-bancarias`, `/preguntas-frecuentes`, `/contacto`, `/forma-de-trabajar`, `/penal`, `/faq-segunda` y `/contenido` (salto accesible al contenido). El logotipo y «Volver arriba» usan `/`.
+
+Las rutas anteriores `/areas`, `/bancario` y `/preguntas` redirigen permanentemente con 301 a sus nombres nuevos en Apache. El navegador también normaliza las rutas antiguas si se utiliza un servidor estático sin esas reglas. Los enlaces de navegación y `/llms.txt` usan solo los nombres nuevos.
 
 `src/routes.js` centraliza el mapa y el comportamiento. El plugin de Vite transforma las anclas semánticas del HTML fuente en enlaces limpios en desarrollo y compilación. El navegador cambia la URL mediante History API y desplaza/focaliza la sección. Se respeta movimiento reducido, selección de área y apertura de FAQ. Atrás/adelante restauran la sección; los enlaces antiguos `/#contacto` siguen funcionando y se normalizan.
 
@@ -15,12 +17,13 @@ Los enlaces visibles usan rutas como `https://amalioabogado.com/contacto`, sin `
 En Apache, `.htaccess` resuelve los alias hacia la HOME antes de añadir una barra al directorio. En Nginx estático, un directorio puede redirigir primero a `/contacto/`; el navegador normaliza después la URL a `/contacto`. Para evitar ese salto, el administrador puede configurar en el bloque del dominio (sin tocar `/api`):
 
 ```nginx
-location ~ ^/(contenido|areas|sobre-mi|segunda-oportunidad|bancario|preguntas|contacto|forma-de-trabajar|penal|faq-segunda)/?$ {
+location ~ ^/(contenido|areas-juridicas|sobre-mi|segunda-oportunidad|reclamaciones-bancarias|preguntas-frecuentes|contacto|forma-de-trabajar|penal|faq-segunda)/?$ {
     try_files /index.html =404;
 }
 ```
 
 Aplicar a través de la configuración adecuada de Plesk y validar con el proveedor. No sustituir las reglas PHP existentes ni configurar un fallback global que oculte errores de `/api`.
+En un hosting exclusivamente Nginx, añadir también redirecciones de las tres rutas antiguas a las nuevas. El alojamiento actual usa Nginx como proxy y Apache para aplicar las reglas del proyecto.
 
 ## SEO y pruebas
 

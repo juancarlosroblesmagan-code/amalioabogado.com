@@ -11,10 +11,12 @@ Este repositorio recoge la documentación solicitada. No incluye el código fuen
 - [Dominio y publicación](docs/DOMINIO.md): canonical, robots, sitemap y comprobaciones pendientes.
 - [Textos legales y verificaciones pendientes](docs/LEGAL.md): alcance y proveedores que deben confirmarse; no certifica cumplimiento legal.
 - [Seguridad y mantenimiento](docs/SEGURIDAD.md): refuerzo aplicado al código y Plesk, pruebas y acciones del titular/proveedor.
+- [SEO local y buscadores con IA](docs/SEO-IA.md): acceso de rastreadores, entidades profesionales y guía pública llms.txt, sin garantía de citación.
+- [Cierre técnico y entrega](docs/CIERRE.md): alcance finalizado y pendientes del titular/proveedor.
 
 ## Estado
 
-La entrega local `dist/` está preparada con indexación habilitada, enlaces limpios y formulario PHP con SMTP autenticado, validación y antispam. Debe subirse **su contenido** a la raíz pública de Plesk y configurar el SMTP **fuera de ella**.
+La HOME está publicada en Plesk con indexación habilitada, enlaces limpios, formulario PHP/SMTP y seguridad reforzada. La configuración SMTP reside **fuera de la raíz pública**. Se ha publicado `/llms.txt` y comprobado acceso al contenido con nombres de rastreadores de búsqueda con IA; esto no garantiza presencia en respuestas. Cierre técnico de la HOME documentado; continúan los pendientes de mantenimiento, cuentas de buscadores y verificación legal.
 
 El frontend pasó las pruebas locales de responsive (320–2560 px), accesibilidad automática e interacciones, incluidas carga directa, recarga e historial de `/contacto`. El backend pasó pruebas con un SMTP TLS local. Posteriormente se instaló la entrega en Plesk y se activó el SMTP privado: un único envío de prueba real obtuvo aceptación SMTP y HTTP 200. Falta confirmar recepción en el buzón destinatario; aceptación SMTP no equivale a llegada a bandeja de entrada.
 
