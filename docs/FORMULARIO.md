@@ -44,6 +44,18 @@ La ruta automática es `../private/amalio-contact.php` respecto de la raíz púb
 
 ## Verificación de producción
 
+### Instalación realizada en Plesk (8 de octubre de 2026)
+
+- Creada copia de seguridad de la HOME anterior fuera de la raíz pública.
+- Subida la compilación actual con `api/`, PHPMailer, rutas de secciones e indexación habilitada. Verificados 34 archivos estáticos remotos contra la entrega local, sin diferencias.
+- Creado `private/amalio-contact.php` fuera de `httpdocs`, con configuración SMTP y clave antispam generada. Permisos del directorio 700 y del archivo 600.
+- Confirmado PHP 8.3.35 (FPM servido por Apache), OpenSSL habilitado y `open_basedir` compatible con el directorio privado.
+- La ruta privada consultada desde la web devuelve 404. El endpoint del formulario devuelve JSON 503 mientras `enabled` siga en false y no haya contraseña configurada; no se ha enviado ningún correo de producción.
+- Pendiente: el titular debe introducir la contraseña directamente en Plesk; después activar la configuración y comprobar SMTP y recepción. No se ha cambiado la contraseña del buzón ni el destinatario.
+- Nginx todavía añade barra en la carga directa de `/contacto`; JavaScript normaliza la URL. Algunas respuestas estáticas de Nginx no incorporan las cabeceras de `.htaccess`; queda revisar su equivalente en Plesk.
+
+La extracción mostró un aviso por separadores de Windows en el ZIP; los archivos estáticos se comprobaron después byte a byte. La prueba de envío y de carga de todas las dependencias PHP queda pendiente de introducir las credenciales.
+
 - Confirmar que `/api/contact.php?action=token` responde JSON, nunca código PHP, y sin caché. Sin configuración debe responder 503.
 - Probar un envío autorizado y verificar la recepción real en el buzón y la respuesta al visitante. Una aceptación SMTP no garantiza la llegada a bandeja de entrada.
 - Verificar errores sin perder datos, validación, ausencia de cookies inesperadas y protección de la carpeta privada.
